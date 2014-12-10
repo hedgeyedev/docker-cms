@@ -43,7 +43,31 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install \
   memcached \
   wget
 # RUN mkdir /rails
+
+# Build MySql version 5.1
 RUN DEBIAN_FRONTEND=noninteractive apt-cache search ncurses
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install libncurses5-dev
 ADD build_mysql51.sh /work/
 RUN /work/build_mysql51.sh
+
+# Build Ruby
+WORKDIR /work
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install \
+  autoconf \
+  bison \
+  curl \
+  libssl-dev \
+  libreadline6-dev \
+  libyaml-dev \
+  subversion \
+  zlib1g \
+  zlib1g-dev
+
+RUN wget -q -O ruby-1.8.7-p370.tar.gz http://cache.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p370.tar.gz
+RUN tar xvf ruby-1.8.7-p370.tar.gz
+RUN rm ruby-1.8.7-p370.tar.gz
+WORKDIR ruby-1.8.7-p370
+RUN ./configure
+RUN make
+RUN make install
+
