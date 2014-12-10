@@ -1,8 +1,8 @@
-# DOCKER_VERSION 1.3.1
-# VERSION 0.0.1
+# DOCKER_VERSION 0.9.0
+# VERSION 0.1.0
 
 FROM ubuntu:12.04
-MAINTAINER Scott Smith <oldfartdeveloper@gmail.com>
+MAINTAINER Edward Paget <ed@zooniverse.org>
 
 # Setup Apt
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
@@ -25,25 +25,5 @@ RUN chmod +x ./opt/start_nginx_rails.sh
 
 VOLUME ["/var/log/nginx", "/var/log/supervisor"]
 
-# Scott: this can happen later
-# EXPOSE 80
-# ENTRYPOINT ["./opt/start_nginx_rails.sh"]
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install \
-  build-essential \
-  git-core \
-  imagemagick \
-  libcurl3 \
-  libcurl4-gnutls-dev \
-  libmagickwand-dev \
-  libsqlite3-dev \
-  libxml2 \
-  libxslt1-dev \
-  memcached \
-  wget
-# RUN mkdir /rails
-RUN DEBIAN_FRONTEND=noninteractive apt-cache search ncurses
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install libncurses5-dev
-ADD build_mysql51.sh /work/
-RUN /work/build_mysql51.sh
+EXPOSE 80
+ENTRYPOINT ["./opt/start_nginx_rails.sh"]
