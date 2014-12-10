@@ -78,3 +78,6 @@ RUN tar -xvzf rubygems-1.8.22.tgz
 WORKDIR /rubygems-1.8.22
 RUN ruby setup.rb
 RUN gem update --system 1.7.2
+
+# Install bundler
+RUN gem install bundler
