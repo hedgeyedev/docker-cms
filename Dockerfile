@@ -3,3 +3,5 @@
 
 FROM hedgeyedev/ruby:0.0.1
 MAINTAINER Scott Smith <oldfartdeveloper@gmail.com>
+
+RUN apt-get -y install vim
